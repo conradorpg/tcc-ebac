@@ -8,24 +8,22 @@ Running on Jenkins in /var/jenkins_home/workspace/api-test-ci
 [Pipeline] git
 The recommended git tool is: NONE
 No credentials specified
-Cloning the remote Git repository
-Cloning repository https://github.com/conradorpg/api-automation-tcc-ebac.git
- > git init /var/jenkins_home/workspace/api-test-ci # timeout=10
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/api-test-ci/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/conradorpg/api-automation-tcc-ebac.git # timeout=10
 Fetching upstream changes from https://github.com/conradorpg/api-automation-tcc-ebac.git
  > git --version # timeout=10
  > git --version # 'git version 2.30.2'
  > git fetch --tags --force --progress -- https://github.com/conradorpg/api-automation-tcc-ebac.git +refs/heads/*:refs/remotes/origin/* # timeout=10
- > git config remote.origin.url https://github.com/conradorpg/api-automation-tcc-ebac.git # timeout=10
- > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
-Avoid second fetch
  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
-Checking out Revision 23e33b71d10ba5327ace5f781fe4fe3ade332978 (refs/remotes/origin/main)
+Checking out Revision db301ff1f8a11a5f8a0aa71dc09ab7e83ce43f59 (refs/remotes/origin/main)
  > git config core.sparsecheckout # timeout=10
- > git checkout -f 23e33b71d10ba5327ace5f781fe4fe3ade332978 # timeout=10
+ > git checkout -f db301ff1f8a11a5f8a0aa71dc09ab7e83ce43f59 # timeout=10
  > git branch -a -v --no-abbrev # timeout=10
- > git checkout -b main 23e33b71d10ba5327ace5f781fe4fe3ade332978 # timeout=10
-Commit message: "melhorias get por id"
-First time build. Skipping changelog.
+ > git branch -D main # timeout=10
+ > git checkout -b main db301ff1f8a11a5f8a0aa71dc09ab7e83ce43f59 # timeout=10
+Commit message: "remove .only dos testes"
+ > git rev-list --no-walk 23e33b71d10ba5327ace5f781fe4fe3ade332978 # timeout=10
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] stage
@@ -43,7 +41,7 @@ npm WARN EBADENGINE   required: { node: '>= 14.0.0' },
 npm WARN EBADENGINE   current: { node: 'v12.22.5', npm: '7.5.2' }
 npm WARN EBADENGINE }
 
-added 265 packages, and audited 266 packages in 14s
+up to date, audited 266 packages in 6s
 
 41 packages are looking for funding
   run `npm fund` for details
@@ -59,7 +57,7 @@ found 0 vulnerabilities
 > api-cypress-test@1.0.0 cy:run
 > npx cypress run
 
-[2949:0721/221308.075087:ERROR:gpu_init.cc(453)] Passthrough is not supported, GL is swiftshader, ANGLE is 
+[4720:0721/232919.082949:ERROR:gpu_init.cc(453)] Passthrough is not supported, GL is swiftshader, ANGLE is 
 
 tput: No value for $TERM and no -T specified
 ====================================================================================================
@@ -85,19 +83,21 @@ https://github.com/browserslist/browserslist#browsers-data-updating
 
 
   Testes com a API EBAC-Shop - Cupons
+    ✓ Listar Cupons
     ✓ Listar Cupom por Id
+    ✓ Cadastrar Cupons
 
 
-  1 passing (4s)
+  3 passing (6s)
 
-[mochawesome] Report JSON saved to /var/jenkins_home/workspace/api-test-ci/mochawesome-report/mochawesome_012.json
+[mochawesome] Report JSON saved to /var/jenkins_home/workspace/api-test-ci/mochawesome-report/mochawesome_013.json
 
 
   (Results)
 
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ Tests:        1                                                                                │
-  │ Passing:      1                                                                                │
+  │ Tests:        3                                                                                │
+  │ Passing:      3                                                                                │
   │ Failing:      0                                                                                │
   │ Pending:      0                                                                                │
   │ Skipped:      0                                                                                │
@@ -111,8 +111,8 @@ https://github.com/browserslist/browserslist#browsers-data-updating
   (Video)
 
   -  Started processing:  Compressing to 32 CRF                                                     
-    Compression progress:  10%
-  -  Finished processing: /var/jenkins_home/workspace/api-test-ci/cypress/videos/cupo   (14 seconds)
+    Compression progress:  1%
+  -  Finished processing: /var/jenkins_home/workspace/api-test-ci/cypress/videos/cupo   (18 seconds)
                           ns.spec.js.mp4                                                            
 
 
@@ -121,13 +121,13 @@ https://github.com/browserslist/browserslist#browsers-data-updating
   (Run Finished)
 
 
+tput: No value for $TERM and no -T specified
        Spec                                              Tests  Passing  Failing  Pending  Skipped  
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ✔  cupons.spec.js                           00:05        1        1        -        -        - │
+  │ ✔  cupons.spec.js                           00:05        3        3        -        -        - │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    ✔  All specs passed!                        00:05        1        1        -        -        -  
+    ✔  All specs passed!                        00:05        3        3        -        -        -  
 
-tput: No value for $TERM and no -T specified
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] }
