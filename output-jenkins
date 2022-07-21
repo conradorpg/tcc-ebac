@@ -1,0 +1,136 @@
+Started by user Conrado Gomes
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/api-test-ci
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Repositório)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/conradorpg/api-automation-tcc-ebac.git
+ > git init /var/jenkins_home/workspace/api-test-ci # timeout=10
+Fetching upstream changes from https://github.com/conradorpg/api-automation-tcc-ebac.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+ > git fetch --tags --force --progress -- https://github.com/conradorpg/api-automation-tcc-ebac.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/conradorpg/api-automation-tcc-ebac.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 23e33b71d10ba5327ace5f781fe4fe3ade332978 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 23e33b71d10ba5327ace5f781fe4fe3ade332978 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b main 23e33b71d10ba5327ace5f781fe4fe3ade332978 # timeout=10
+Commit message: "melhorias get por id"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Dependências)
+[Pipeline] sh
++ npm install
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@faker-js/faker@6.3.1',
+npm WARN EBADENGINE   required: { node: '>=14.0.0', npm: '>=6.0.0' },
+npm WARN EBADENGINE   current: { node: 'v12.22.5', npm: '7.5.2' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'mocha@10.0.0',
+npm WARN EBADENGINE   required: { node: '>= 14.0.0' },
+npm WARN EBADENGINE   current: { node: 'v12.22.5', npm: '7.5.2' }
+npm WARN EBADENGINE }
+
+added 265 packages, and audited 266 packages in 14s
+
+41 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Testes)
+[Pipeline] sh
++ NO_COLOR=1 npm run cy:run
+
+> api-cypress-test@1.0.0 cy:run
+> npx cypress run
+
+[2949:0721/221308.075087:ERROR:gpu_init.cc(453)] Passthrough is not supported, GL is swiftshader, ANGLE is 
+
+tput: No value for $TERM and no -T specified
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        9.6.1                                                                          │
+  │ Browser:        Electron 94 (headless)                                                         │
+  │ Node Version:   v12.22.5 (/usr/bin/node)                                                       │
+  │ Specs:          1 found (cupons.spec.js)                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  cupons.spec.js                                                                  (1 of 1)
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+
+
+  Testes com a API EBAC-Shop - Cupons
+    ✓ Listar Cupom por Id
+
+
+  1 passing (4s)
+
+[mochawesome] Report JSON saved to /var/jenkins_home/workspace/api-test-ci/mochawesome-report/mochawesome_012.json
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        true                                                                             │
+  │ Duration:     5 seconds                                                                        │
+  │ Spec Ran:     cupons.spec.js                                                                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Video)
+
+  -  Started processing:  Compressing to 32 CRF                                                     
+    Compression progress:  10%
+  -  Finished processing: /var/jenkins_home/workspace/api-test-ci/cypress/videos/cupo   (14 seconds)
+                          ns.spec.js.mp4                                                            
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔  cupons.spec.js                           00:05        1        1        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✔  All specs passed!                        00:05        1        1        -        -        -  
+
+tput: No value for $TERM and no -T specified
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
