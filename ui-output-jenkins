@@ -1,0 +1,135 @@
+Started by user Conrado Gomes
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/ui-test-ci
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Repositório)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/conradorpg/ui-automation-tcc-ebac.git
+ > git init /var/jenkins_home/workspace/ui-test-ci # timeout=10
+Fetching upstream changes from https://github.com/conradorpg/ui-automation-tcc-ebac.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+ > git fetch --tags --force --progress -- https://github.com/conradorpg/ui-automation-tcc-ebac.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/conradorpg/ui-automation-tcc-ebac.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision b60f213c281fd480796eced2dfa593dd914a5fa6 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f b60f213c281fd480796eced2dfa593dd914a5fa6 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b main b60f213c281fd480796eced2dfa593dd914a5fa6 # timeout=10
+Commit message: "first commit"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Dependências)
+[Pipeline] sh
++ npm install
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@faker-js/faker@6.1.2',
+npm WARN EBADENGINE   required: { node: '>=14.0.0', npm: '>=6.0.0' },
+npm WARN EBADENGINE   current: { node: 'v12.22.5', npm: '7.5.2' }
+npm WARN EBADENGINE }
+
+added 166 packages, and audited 167 packages in 53s
+
+27 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Testes)
+[Pipeline] sh
++ NO_COLOR=1 npm run cy:run
+
+> ui-test-cypress@1.0.0 cy:run
+> npx cypress run
+
+It looks like this is your first time using Cypress: 9.5.4
+
+[STARTED] Task without title.
+[SUCCESS] Task without title.
+
+Opening Cypress...
+[3959:0721/224409.968931:ERROR:gpu_init.cc(453)] Passthrough is not supported, GL is swiftshader, ANGLE is
+
+tput: No value for $TERM and no -T specified
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        9.5.4                                                                          │
+  │ Browser:        Electron 94 (headless)                                                         │
+  │ Node Version:   v12.22.5 (/usr/bin/node)                                                       │
+  │ Specs:          1 found (1-ui-test/1 - product.spec.js)                                        │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Running:  1-ui-test/1 - product.spec.js                                                   (1 of 1)
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+
+
+  Funcionalidade página de produtos
+    ✓ Adicionar produtos ao carrinho (43013ms)
+
+
+  1 passing (43s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        true                                                                             │
+  │ Duration:     43 seconds                                                                       │
+  │ Spec Ran:     1-ui-test/1 - product.spec.js                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Video)
+
+  -  Started processing:  Compressing to 32 CRF
+  -  Finished processing: /var/jenkins_home/workspace/ui-test-ci/cypress/videos/1-ui-   (17 seconds)
+                          test/1 - product.spec.js.mp4
+
+    Compression progress:  100%
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔  1-ui-test/1 - product.spec.js            00:43        1        1        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✔  All specs passed!                        00:43        1        1        -        -        -
+
+tput: No value for $TERM and no -T specified
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
